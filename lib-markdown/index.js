@@ -1,11 +1,25 @@
-const chalk = require('chalk');
 const fs = require('fs');
+
+function trataErro(erro) {
+  throw new Error(erro.code);
+}
 
 function pegaArquivo(caminhoDoArquivo) {
   const encoding = 'utf-8';
-  fs.readFile(caminhoDoArquivo, encoding, (_, texto) => {
-    console.log(chalk.green(texto));
-  })
+  fs.promises
+    .readFile(caminhoDoArquivo, encoding)
+    .then((texto) => console.log(texto))
+    .catch((erro) => trataErro(erro))
 }
 
-pegaArquivo('./arquivos/texto1.md');
+// function pegaArquivo(caminhoDoArquivo) {
+//   const encoding = 'utf-8';
+//   fs.readFile(caminhoDoArquivo, encoding, (erro, texto) => {
+//     if (erro) {
+//       trataErro(erro);
+//     }
+//     console.log((texto));
+//   })
+// }
+
+pegaArquivo('./arquivos/texto1.md'); 
