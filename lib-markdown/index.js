@@ -4,13 +4,24 @@ function trataErro(erro) {
   throw new Error(erro.code);
 }
 
-function pegaArquivo(caminhoDoArquivo) {
+async function pegaArquivo(caminhoDoArquivo) {
   const encoding = 'utf-8';
-  fs.promises
-    .readFile(caminhoDoArquivo, encoding)
-    .then((texto) => console.log(texto))
-    .catch((erro) => trataErro(erro))
+  try {
+    const texto = await fs.promises.readFile(caminhoDoArquivo, encoding)
+    console.log(texto)
+  } catch (erro) {
+    trataErro(erro);
+  }
+
 }
+
+// function pegaArquivo(caminhoDoArquivo) {
+//   const encoding = 'utf-8';
+//   fs.promises
+//     .readFile(caminhoDoArquivo, encoding)
+//     .then((texto) => console.log(texto))
+//     .catch((erro) => trataErro(erro))
+// }
 
 // function pegaArquivo(caminhoDoArquivo) {
 //   const encoding = 'utf-8';
