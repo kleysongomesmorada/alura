@@ -11,9 +11,9 @@ async function checaStatus(arrayURLs) {
         .map(async url => {
           const res = await fetch(url)
           return res.status;
-    }))
+        }))
     return arrayStatus;
-  } catch(erro) {
+  } catch (erro) {
     manejaErros(erro);
   }
 }
@@ -27,7 +27,7 @@ function geraArrayDeURLs(arrayLinks) {
 async function validaURLs(arrayLinks) {
   const links = geraArrayDeURLs(arrayLinks);
   const statusLinks = await checaStatus(links);
-  
+
   const resultados = arrayLinks.map((objeto, indice) => ({
     ...objeto,
     status: statusLinks[indice]
